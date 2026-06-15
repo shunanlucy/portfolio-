@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sourav S. Panja | Interactive Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #10b981;
+            --accent-hover: #059669;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .portfolio-container {
+            width: 100%;
+            max-width: 650px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+        .header-section {
+            padding: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .header-section h1 {
+            font-size: 24px;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            color: var(--text-main);
+        }
+        .header-section p {
+            color: var(--accent-color);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            background: #111827;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .tab-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 15px 10px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+        }
+        .tab-btn:hover {
+            color: var(--text-main);
+            background: rgba(255,255,255,0.02);
+        }
+        .tab-btn.active {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+            background: var(--card-bg);
+        }
+        .content-section {
+            padding: 30px;
+            min-height: 300px;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h3 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        p {
+            line-height: 1.6;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        .timeline-item {
+            border-left: 2px solid var(--border-color);
+            padding-left: 15px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-color);
+            border-radius: 50%;
+        }
+        .timeline-date {
+            font-size: 12px;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        .timeline-title {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text-main);
+        }
+        .timeline-company {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+        .grid-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .grid-item {
+            background: #111827;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 13px;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+
+<div class="portfolio-container">
+    <div class="header-section">
+        <h1>SOURAV S. PANJA</h1>
+        <p>Accountant & Content Specialist</p>
+    </div>
+    
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="openTab('about')">ABOUT</button>
+        <button class="tab-btn" onclick="openTab('experience')">EXPERIENCE</button>
+        <button class="tab-btn" onclick="openTab('education')">EDUCATION</button>
+        <button class="tab-btn" onclick="openTab('skills')">SKILLS</button>
+        <button class="tab-btn" onclick="openTab('hobbies')">HOBBIES</button>
+    </div>
+    
+    <div class="content-section">
+        <div id="about" class="tab-content active">
+            <h3>About Me</h3>
+            <p>Versatile aur data-driven professional hoon jise structured administrative workflows, advanced financial accounting, aur digital media operations ka solid experience hai. Firebase platforms, system configurations aur continuous data logging setups ke ecosystem ko optimize karne me maharat rakhta hoon.</p>
+        </div>
+        
+        <div id="experience" class="tab-content">
+            <h3>Work Experience</h3>
+            <div class="timeline-item">
+                <div class="timeline-date">2025 - 2026</div>
+                <div class="timeline-title">Poultry Farming Accountant</div>
+                <div class="timeline-company">MRAJ Farmer | West Bengal</div>
+                <p>Commercial accounts ledger systems, capital distribution balance sheets, and operations audit metrics tracking handle kiye.</p>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2022 - 2025</div>
+                <div class="timeline-title">Social Media Manager (SEO)</div>
+                <div class="timeline-company">Icon Unisex Salon | Kolkata</div>
+                <p>Hyper-local digital campaigns, search volume index enhancements, and consumer visibility pipelines automate kiya.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2022 - 2025</div>
+                <div class="timeline-title">Content Creator (Gamer)</div>
+                <div class="timeline-company">Shunan Games | YouTube</div>
+                <p>Digital analytics optimization, metadata targeting, and custom streaming technology implementation pipelines deployment.</p>
+            </div>
+        </div>
+        
+        <div id="education" class="tab-content">
+            <h3>Education & Training</h3>
+            <div class="timeline-item">
+                <div class="timeline-date">2018</div>
+                <div class="timeline-title">Associate of Science (Computer Science)</div>
+                <div class="timeline-company">Swami Vivekanand International Jr College, Mumbai</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">Professional Course</div>
+                <div class="timeline-title">Animation & Special Effects</div>
+                <div class="timeline-company">MAAC, Mumbai</div>
+            </div>
+        </div>
+        
+        <div id="skills" class="tab-content">
+            <h3>Technical Capabilities</h3>
+            <div class="grid-list">
+                <div class="grid-item">Financial Accounting</div>
+                <div class="grid-item">Firebase Core Environment</div>
+                <div class="grid-item">Search Engine Optimization</div>
+                <div class="grid-item">Workflow Automation</div>
+                <div class="grid-item">Analytical Logs Tracking</div>
+                <div class="grid-item">Systems Architecture</div>
+            </div>
+        </div>
+        
+        <div id="hobbies" class="tab-content">
+            <h3>Strategic Interests</h3>
+            <div class="grid-list">
+                <div class="grid-item">Algorithmic Trading Networks</div>
+                <div class="grid-item">Systems Engineering & Automation</div>
+                <div class="grid-item">Ukulele String Arrangements</div>
+                <div class="grid-item">Data-driven Simulation Analytics</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openTab(tabId) {
+        let contents = document.querySelectorAll('.tab-content');
+        let tabs = document.querySelectorAll('.tab-btn');
+        contents.forEach(content => content.classList.remove('active'));
+        tabs.forEach(tab => tab.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+</script>
+</body>
+</html>
