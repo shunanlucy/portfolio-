@@ -3,157 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sourav S. Panja | Interactive Portfolio</title>
+    <title>Sourav S. Panja | Interactive Portal</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-color: #10b981;
-            --accent-hover: #059669;
-            --text-main: #f8fafc;
+            --bg-color: #0b0f19;
+            --card-bg: rgba(22, 30, 49, 0.7);
+            --accent-glow: #00ffa3;
+            --accent-solid: #10b981;
+            --text-main: #ffffff;
             --text-muted: #94a3b8;
-            --border-color: #334155;
+            --border-line: rgba(51, 65, 85, 0.5);
         }
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
             background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(0, 255, 163, 0.05) 0px, transparent 50%);
             color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
         }
         .portfolio-container {
             width: 100%;
-            max-width: 650px;
+            max-width: 600px;
             background: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            border: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+            border: 1px solid var(--border-line);
             overflow: hidden;
         }
         .header-section {
-            padding: 30px;
+            padding: 35px 20px 25px 20px;
             text-align: center;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-line);
+            position: relative;
+        }
+        .header-section::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 25%;
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
         }
         .header-section h1 {
-            font-size: 24px;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-            color: var(--text-main);
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+            text-shadow: 0 0 20px rgba(0, 255, 163, 0.3);
         }
         .header-section p {
-            color: var(--accent-color);
-            font-size: 14px;
-            font-weight: 600;
+            color: var(--accent-glow);
+            font-size: 13px;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 2px;
         }
         .nav-tabs {
             display: flex;
-            flex-wrap: wrap;
-            background: #111827;
-            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+            background: rgba(11, 15, 25, 0.5);
+            border-bottom: 1px solid var(--border-line);
+            scrollbar-width: none;
+        }
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
         }
         .tab-btn {
             flex: 1;
-            min-width: 100px;
-            padding: 15px 10px;
+            min-width: 95px;
+            padding: 16px 5px;
             background: none;
             border: none;
             color: var(--text-muted);
-            font-weight: 600;
-            font-size: 13px;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 0.5px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
-            border-bottom: 3px solid transparent;
-        }
-        .tab-btn:hover {
-            color: var(--text-main);
-            background: rgba(255,255,255,0.02);
+            position: relative;
         }
         .tab-btn.active {
-            color: var(--accent-color);
-            border-bottom-color: var(--accent-color);
-            background: var(--card-bg);
+            color: var(--text-main);
+            background: rgba(255,255,255,0.03);
+        }
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-glow);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            box-shadow: 0 -3px 10px var(--accent-glow);
+        }
+        .tab-btn.active::after {
+            transform: scaleX(1);
         }
         .content-section {
-            padding: 30px;
-            min-height: 300px;
+            padding: 25px;
+            min-height: 320px;
         }
         .tab-content {
             display: none;
-            animation: fadeIn 0.4s ease forwards;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
         }
         .tab-content.active {
             display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        h3 {
-            color: var(--accent-color);
-            margin-bottom: 15px;
+        .section-title {
             font-size: 18px;
-        }
-        p {
-            line-height: 1.6;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-        .timeline-item {
-            border-left: 2px solid var(--border-color);
-            padding-left: 15px;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -6px;
-            top: 5px;
-            width: 10px;
-            height: 10px;
-            background: var(--accent-color);
-            border-radius: 50%;
-        }
-        .timeline-date {
-            font-size: 12px;
-            color: var(--accent-color);
-            font-weight: bold;
-            margin-bottom: 3px;
-        }
-        .timeline-title {
-            font-weight: 600;
-            font-size: 15px;
             color: var(--text-main);
+            margin-bottom: 20px;
+            font-weight: 700;
+            border-left: 4px solid var(--accent-glow);
+            padding-left: 10px;
         }
-        .timeline-company {
+        .bio-p {
+            line-height: 1.7;
+            color: var(--text-muted);
+            font-size: 14.5px;
+            margin-bottom: 15px;
+        }
+        .blueprint-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-line);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 15px;
+        }
+        .bp-meta {
+            font-size: 12px;
+            color: var(--accent-glow);
+            font-weight: 700;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+        .bp-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+        .bp-comp {
             font-size: 13px;
             color: var(--text-muted);
-            margin-bottom: 5px;
+            font-weight: 600;
+            margin-bottom: 10px;
         }
-        .grid-list {
+        .bp-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .bp-list li {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 15px;
+        }
+        .bp-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-glow);
+        }
+        .grid-box {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
-        .grid-item {
-            background: #111827;
-            padding: 10px 15px;
-            border-radius: 8px;
+        .grid-element {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 12px 15px;
+            border-radius: 10px;
             font-size: 13px;
-            border: 1px solid var(--border-color);
+            font-weight: 600;
+            border: 1px solid var(--border-line);
             color: var(--text-main);
+            display: flex;
+            align-items: center;
+        }
+        .grid-element::before {
+            content: '◆';
+            margin-right: 8px;
+            color: var(--accent-glow);
+            font-size: 10px;
         }
     </style>
 </head>
@@ -162,7 +219,7 @@
 <div class="portfolio-container">
     <div class="header-section">
         <h1>SOURAV S. PANJA</h1>
-        <p>Accountant & Content Specialist</p>
+        <p>Accountant & Digital Systems Specialist</p>
     </div>
     
     <div class="nav-tabs">
@@ -175,68 +232,135 @@
     
     <div class="content-section">
         <div id="about" class="tab-content active">
-            <h3>About Me</h3>
-            <p>Versatile aur data-driven professional hoon jise structured administrative workflows, advanced financial accounting, aur digital media operations ka solid experience hai. Firebase platforms, system configurations aur continuous data logging setups ke ecosystem ko optimize karne me maharat rakhta hoon.</p>
+            <h3 class="section-title">About Me</h3>
+            <p class="bio-p">Versatile aur data-driven professional hoon jise structured administrative workflows, advanced financial accounting, aur digital media operations ka solid experience hai.</p>
+            <p class="bio-p">Firebase platforms, system configurations aur continuous data logging setups ke ecosystem ko optimize karne me maharat rakhta hoon.</p>
+            <div style="margin-top:20px; border-top:1px solid var(--border-line); padding-top:15px;">
+                <p class="bio-p" style="font-size:13px;"><strong style="color:var(--text-main);">📍 Location:</strong> Kolkata, WB</p>
+                <p class="bio-p" style="font-size:13px;"><strong style="color:var(--text-main);">✉️ Email:</strong> shunanians@gmail.com</p>
+                <p class="bio-p" style="font-size:13px;"><strong style="color:var(--text-main);">📞 Phone:</strong> +91 9007707714</p>
+            </div>
         </div>
         
         <div id="experience" class="tab-content">
-            <h3>Work Experience</h3>
-            <div class="timeline-item">
-                <div class="timeline-date">2025 - 2026</div>
-                <div class="timeline-title">Poultry Farming Accountant</div>
-                <div class="timeline-company">MRAJ Farmer | West Bengal</div>
-                <p>Commercial accounts ledger systems, capital distribution balance sheets, and operations audit metrics tracking handle kiye.</p>
+            <h3 class="section-title">Work Experience</h3>
+            
+            <div class="blueprint-card">
+                <div class="bp-meta">2025 - 2026 | Manager & Accountant</div>
+                <div class="bp-title">MRAJ Farmer</div>
+                <div class="bp-comp">West Bengal</div>
+                <ul class="bp-list">
+                    <li>Managed daily business operations of the farm.</li>
+                    <li>Handled financial accounting and daily logs.</li>
+                    <li>Checked stock inventory and tracked daily bills.</li>
+                </ul>
             </div>
             
-            <div class="timeline-item">
-                <div class="timeline-date">2022 - 2025</div>
-                <div class="timeline-title">Social Media Manager (SEO)</div>
-                <div class="timeline-company">Icon Unisex Salon | Kolkata</div>
-                <p>Hyper-local digital campaigns, search volume index enhancements, and consumer visibility pipelines automate kiya.</p>
+            <div class="blueprint-card">
+                <div class="bp-meta">August 2022 - 2025 | CEO / General Manager</div>
+                <div class="bp-title">Icon Unisex Salon</div>
+                <div class="bp-comp">Kolkata</div>
+                <ul class="bp-list">
+                    <li>Managed total salon daily operations.</li>
+                    <li>Handled customer billing and cash management.</li>
+                    <li>Managed staff members and checked product stocks.</li>
+                    <li>Managed social media pages and business marketing.</li>
+                </ul>
             </div>
 
-            <div class="timeline-item">
-                <div class="timeline-date">2022 - 2025</div>
-                <div class="timeline-title">Content Creator (Gamer)</div>
-                <div class="timeline-company">Shunan Games | YouTube</div>
-                <p>Digital analytics optimization, metadata targeting, and custom streaming technology implementation pipelines deployment.</p>
+            <div class="blueprint-card">
+                <div class="bp-meta">June 2022 - 2025 | Content Creator & Editor</div>
+                <div class="bp-title">Shunan Games</div>
+                <div class="bp-comp">YouTube Platform</div>
+                <ul class="bp-list">
+                    <li>Maintained and grew the gaming channel.</li>
+                    <li>Created, recorded, and edited videos.</li>
+                    <li>Managed channel settings and performed regular livestreams.</li>
+                </ul>
+            </div>
+
+            <div class="blueprint-card">
+                <div class="bp-meta">September 2021 - June 2022 | Personal Assistant</div>
+                <div class="bp-title">Office Administration</div>
+                <div class="bp-comp">Kolkata</div>
+                <ul class="bp-list">
+                    <li>Provided computer and technical support to the office.</li>
+                    <li>Assisted in basic accounting tasks.</li>
+                    <li>Did internet research work on Google.</li>
+                    <li>Managed food and beverage service arrangements.</li>
+                </ul>
+            </div>
+
+            <div class="blueprint-card">
+                <div class="bp-meta">May 2019 - August 2020 | Cyber Cafe Manager</div>
+                <div class="bp-title">Cyber Service Cafe</div>
+                <div class="bp-comp">Howrah</div>
+                <ul class="bp-list">
+                    <li>Handled walk-in customers and solved issues.</li>
+                    <li>Filled out online application forms for clients.</li>
+                    <li>Managed computer systems, printing, and scanning works.</li>
+                </ul>
+            </div>
+
+            <div class="blueprint-card">
+                <div class="bp-meta">November 2018 - April 2019 | Food Service Staff</div>
+                <div class="bp-title">KG Ice Cream & Falooda</div>
+                <div class="bp-comp">Canning</div>
+                <ul class="bp-list">
+                    <li>Served ice cream and desserts to customers.</li>
+                    <li>Handled daily counter cash transactions.</li>
+                    <li>Maintained shop and counter cleanliness.</li>
+                </ul>
+            </div>
+
+            <div class="blueprint-card">
+                <div class="bp-meta">October 2017 - October 2018 | Cyber Cafe Manager</div>
+                <div class="bp-title">White Hat Cafe</div>
+                <div class="bp-comp">Mumbai</div>
+                <ul class="bp-list">
+                    <li>Managed daily cafe operations.</li>
+                    <li>Assisted users with internet tasks and online form filling.</li>
+                    <li>Handled daily counter cash.</li>
+                </ul>
             </div>
         </div>
         
         <div id="education" class="tab-content">
-            <h3>Education & Training</h3>
-            <div class="timeline-item">
-                <div class="timeline-date">2018</div>
-                <div class="timeline-title">Associate of Science (Computer Science)</div>
-                <div class="timeline-company">Swami Vivekanand International Jr College, Mumbai</div>
+            <h3 class="section-title">Education & Certifications</h3>
+            
+            <div class="blueprint-card">
+                <div class="bp-meta">2018 | Graduation</div>
+                <div class="bp-title">Associate of Science (Computer Science)</div>
+                <div class="bp-comp">Swami Vivekanand International Jr College, Mumbai</div>
             </div>
             
-            <div class="timeline-item">
-                <div class="timeline-date">Professional Course</div>
-                <div class="timeline-title">Animation & Special Effects</div>
-                <div class="timeline-company">MAAC, Mumbai</div>
+            <div class="blueprint-card">
+                <div class="bp-meta">Professional Training</div>
+                <div class="bp-title">Animation & Special Effects</div>
+                <div class="bp-comp">MAAC, Mumbai</div>
             </div>
         </div>
         
         <div id="skills" class="tab-content">
-            <h3>Technical Capabilities</h3>
-            <div class="grid-list">
-                <div class="grid-item">Financial Accounting</div>
-                <div class="grid-item">Firebase Core Environment</div>
-                <div class="grid-item">Search Engine Optimization</div>
-                <div class="grid-item">Workflow Automation</div>
-                <div class="grid-item">Analytical Logs Tracking</div>
-                <div class="grid-item">Systems Architecture</div>
+            <h3 class="section-title">Technical Skills</h3>
+            <div class="grid-box">
+                <div class="grid-element">Financial Accounting</div>
+                <div class="grid-element">Firebase Operations</div>
+                <div class="grid-element">Search Engine Optimization</div>
+                <div class="grid-element">Workflow Automation</div>
+                <div class="grid-element">Budget & Stock Control</div>
+                <div class="grid-element">Google Workspace Suite</div>
             </div>
         </div>
         
         <div id="hobbies" class="tab-content">
-            <h3>Strategic Interests</h3>
-            <div class="grid-list">
-                <div class="grid-item">Algorithmic Trading Networks</div>
-                <div class="grid-item">Systems Engineering & Automation</div>
-                <div class="grid-item">Ukulele String Arrangements</div>
-                <div class="grid-item">Data-driven Simulation Analytics</div>
+            <h3 class="section-title">Hobbies & Interests</h3>
+            <div class="grid-box">
+                <div class="grid-element">Walking</div>
+                <div class="grid-element">Listening Music</div>
+                <div class="grid-element">Gaming</div>
+                <div class="grid-element">Cooking</div>
+                <div class="grid-element">Helping the Needy</div>
             </div>
         </div>
     </div>
@@ -246,9 +370,19 @@
     function openTab(tabId) {
         let contents = document.querySelectorAll('.tab-content');
         let tabs = document.querySelectorAll('.tab-btn');
-        contents.forEach(content => content.classList.remove('active'));
+        
+        contents.forEach(content => {
+            content.classList.remove('active');
+            content.style.display = 'none';
+        });
         tabs.forEach(tab => tab.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
+        
+        let activeContent = document.getElementById(tabId);
+        activeContent.style.display = 'block';
+        setTimeout(() => {
+            activeContent.classList.add('active');
+        }, 10);
+        
         event.currentTarget.classList.add('active');
     }
 </script>
